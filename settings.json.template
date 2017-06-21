@@ -1,0 +1,127 @@
+{
+ 
+   "URL_WEB_SITE": "https://claveunica.gob.cl",
+   "BACKUP_SITE":false,
+   "RESPONSES_LOGIN":{
+      "500":{
+         "message":"Ups, algo salio mal, intente nuevamente o contáctese con el administrador del sitio",
+         "code":500
+      },
+      "400":{
+         "message":"Bad request",
+         "code":500
+      },
+      "INVALID_RUN":{
+         "message":"RUN  inválido",
+         "code":412
+      },
+      "0":{
+         "message":"Tu contraseña es incorrecta. Si la olvidaste, accede a https://claveunica.gob.cl/recuperar",
+         "code":401
+      },
+      "2":{
+         "message":"La ClaveÚnica asociada al RUN se encuentra bloqueada, por favor ingrese a https://claveunica.gob.cl/recuperar para recuperarla",
+         "code":401
+      },
+      "3":{
+         "message":"El RUN indicado no cuenta con ClaveÚnica",
+         "code":403
+      },
+      "4":{
+         "message":"El RUN indicado aún no activa ClaveÚnica",
+         "code":409
+      }
+   },
+   "TOKEN_AUTH":"",
+   "URL_AUTH":"",
+   "URL_ACTIVATION":"",
+   "URL_ACTIVATION_CREATE_USER":"",
+   "URL_ACTIVATION_GET_INFO_USER":"",
+   "URL_GET_INFO_USER":"",
+   "URL_UPDATE_INFO_USER":"",
+   "URL_GET_METHOD_USER_RECOVERY":"",
+   "URL_REQUEST_METHOD_USER_RECOVERY":"",
+   "URL_FRONT_PLACES":"",
+   "URL_FRONT_REGIONS":"",
+   "URL_FRONT_COMUNAS":"",
+   "URL_FRONT_FAQ_USERS":"",
+   "URL_FRONT_PROCEDURES":"",
+   "URL_FRONT_INSTITUTIONS_METRICS":"",
+   "URL_LOG_DEV":"",
+   "URL_LOG_USER_SANDBOX":"",
+   "URL_LIST_LAST_LOG_USER":"",
+   "URL_POST_FORM":"",
+   "URL_GET_FORM_DOWNLOAD":"",
+   "URL_SUPPORT_INFO":"",
+   "URL_SUPPORT_RECOVERY":"",   
+   "INFO_PAYLOAD":{
+      "JWT_SECRET":"secret",
+      "JWT_ALGORITHM":"HS256",
+      "JWT_EXP_DELTA_SECONDS":600
+   },
+   "PAYLOAD":{
+      "id":"",
+      "exp":"",
+      "activation":"",
+      "recovery":"",
+      "support":"",
+      "institution":""
+   },
+   "BODY_SCHEMA_LOGIN":{
+      "type":"object",
+      "properties":{
+         "username":{
+            "type":"string",
+            "pattern":"^(?!0)(?:\\d+|\\d{1,3}(?:\\.\\d{3})+)-([\\dkK])$"
+         },
+         "password":{
+            "type":"string"
+         }
+      },
+      "required":[
+         "username",
+         "password"
+      ],
+      "additionalProperties":false
+   },
+   "DBM":{
+      "USER":"",
+      "PASSWORD":"",
+      "HOST":[
+         ""
+      ],
+      "REPLICASET":"",
+      "DB":""
+   },
+   "RESPONSES_GENERIC":{
+      "not_logged":{"status": "error", "code": 1, "params": [], "message": "Is not logged", "object": {}},
+      "bad_request":{"status": "error", "code": 2, "params": [], "message": "Bad request", "object": {}},
+      "internal_error":{"status": "error", "code": 5, "params": [], "message": "Internal error", "object": {}},
+      "logout":{"status": "error", "code": 4, "params": [], "message": "Session deleted", "object": {}},
+      "missing_token":{"status": "error", "code": 6, "params": [], "message": "Token is missing", "object": {}},
+      "missing_session":{"status": "error", "code": 10, "params": [], "message": "Session is missing", "object": {}},      
+      "invalid_token":{"status": "error", "code": 7, "params": [], "message": "Token is invalid", "object": {}},
+      "unauthorized":{"status": "error", "code": 8, "params": [], "message": "User not allowed to perform this action", "object": {}},
+      "unavailable":{"status": "error", "code": 9, "params": [], "message": "Service temporarily unavailable", "object": {}}
+   },
+   "token_from_headers":{
+      "10000":{
+         "0000":true
+      },
+      "01000":{
+         "1000":true
+      },
+      "00100":{
+         "0100":true
+      },
+      "10011":{
+         "0011":true
+      },
+      "10010":{
+         "0010":true
+      },
+      "10001":{
+         "0001":true
+      }
+   }
+}
