@@ -88,8 +88,11 @@ class BaseHandler(tornado.web.RequestHandler):
         # Check session
         if not (int(run_numero_url) == run_numero):
             # Delete token activation
-            BaseHandler.delete_session(self.request.headers.get("token"))
-            return self.response(BaseHandler.config["RESPONSES_GENERIC"]["unauthorized"], 401, BaseHandler.headers_json, None, True)
+            try:
+                BaseHandler.delete_session(self.request.headers.get("token"))
+                return self.response(BaseHandler.config["RESPONSES_GENERIC"]["unauthorized"], 401, BaseHandler.headers_json, None, True)
+            except:
+                pass
 
     def check_is_logged(self, is_logged):
         if self.request.headers.get("token") is not None and not is_logged:
