@@ -63,6 +63,7 @@ class BaseHandler(tornado.web.RequestHandler):
         try:
             # type_token: activation-recovery-support-institution
             # source_token: login-activation-recovery-support-institution
+            support = False
             if "support" in data_session and data_session["support"] is not False:
                 support = True
             type_token = str(int(data_session["activation"])) + str(int(data_session["recovery"])) + str(int(support)) + str(int(data_session["institution"]))
