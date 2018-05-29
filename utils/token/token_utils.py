@@ -25,7 +25,7 @@ class Token_JWT():
         payload["exp"] = datetime.utcnow() + timedelta(seconds=info_payload["JWT_EXP_DELTA_SECONDS"])
         payload["activation"] = activation
         payload["recovery"] = recovery
-        payload["support"] = support
+        payload["support"] = support["support"] if support is not False else False
         payload["institution"] = institution
         jwt_token = jwt.encode(payload, info_payload["JWT_SECRET"], info_payload["JWT_ALGORITHM"])
         return {"token": jwt_token.decode("utf-8")}

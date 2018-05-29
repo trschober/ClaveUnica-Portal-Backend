@@ -44,7 +44,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_status(code, reason)
         self.write(message)
         if error:
-            raise Finish
+            raise Finish()
         else:
             self.finish()
 
@@ -55,7 +55,7 @@ class BaseHandler(tornado.web.RequestHandler):
         # Get token from headers
         token = self.request.headers.get("token")
         if token is None:
-            self.response(BaseHandler.config["RESPONSES_GENERIC"]["missing_token"], 401, BaseHandler.headers_json, None, True)
+            return self.response(BaseHandler.config["RESPONSES_GENERIC"]["missing_token"], 401, BaseHandler.headers_json, None, True)
         # Check token is valid
         token_status, data_session = Token_JWT().check_token(token, self.config["INFO_PAYLOAD"])
         if not (token_status and not BaseHandler.dbm.find_exist_db_storage("front_token_sessions_blacklisted", "token", token)):
@@ -63,8 +63,10 @@ class BaseHandler(tornado.web.RequestHandler):
         try:
             # type_token: activation-recovery-support-institution
             # source_token: login-activation-recovery-support-institution
-            type_token = str(int(data_session["activation"])) + str(int(data_session["recovery"])) + str(int(data_session["support"])) + str(int(data_session["institution"]))
-            source_token = str(int(login)) + str(int(activation)) + str(int(recovery)) + str(int(data_session["support"])) + str(int(data_session["institution"]))
+            if data_session["support"] is not False:
+                support = True
+            type_token = str(int(data_session["activation"])) + str(int(data_session["recovery"])) + str(int(support)) + str(int(data_session["institution"]))
+            source_token = str(int(login)) + str(int(activation)) + str(int(recovery)) + str(int(support)) + str(int(data_session["institution"]))
             self.config["token_from_headers"][source_token][type_token]
             return data_session
         except:
@@ -99,3 +101,4 @@ class BaseHandler(tornado.web.RequestHandler):
             return self.response(BaseHandler.config["RESPONSES_GENERIC"]["bad_request"], 400, BaseHandler.headers_json, None, True)
         if self.request.headers.get("token") is None and is_logged:
             return self.response(BaseHandler.config["RESPONSES_GENERIC"]["bad_request"], 400, BaseHandler.headers_json, None, True)
+

@@ -44,7 +44,8 @@ class LoginHandler(BaseHandler):
                 return self.response(token_response, response_auth.status_code, BaseHandler.headers_json)
             else:
                 return self.response(response_auth_json, response_auth.status_code, BaseHandler.headers_json)
-        except:
+        except Exception as e:
+            print(e)
             return self.response(BaseHandler.config["RESPONSES_GENERIC"]["internal_error"], 500, BaseHandler.headers_json)
 
 

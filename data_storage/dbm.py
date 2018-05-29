@@ -23,6 +23,7 @@ class DBM_Repository:
         except:
             return False
         if result_object is not None:
-            return True
+            del result_object["_id"]
+            return result_object
         else:
             return False

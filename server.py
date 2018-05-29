@@ -14,6 +14,7 @@ from resources.APIS.front import faq, places, procedures
 from resources.APIS.front.institutions import metrics, form
 from resources.APIS.front.users import last_log_activity
 from resources.APIS.support import support
+from resources.APIS.support.agents import user_agent
 
 # Settings apps
 version = "v1"
@@ -40,7 +41,10 @@ handlers = [
     (r"/api/" + version + "/front/institutions/form/download$", form.FrontInstitutionsFormHandler),
     (r"/api/" + version + "/front/users/(?P<run_numero_url>\d+)/logs$", last_log_activity.FrontUsersActivityHandler),
     (r"/api/" + version + "/support/(?P<run_numero_url>\d+)$", support.SupportHandler),
-    (r"/api/" + version + "/support/(?P<run_numero_url>\d+)/recovery/(?P<method>\d+)$", support.SupportHandler)
+    (r"/api/" + version + "/support/(?P<run_numero_url>\d+)/recovery/(?P<method>\d+)$", support.SupportHandler),
+    (r"/api/" + version + "/support/(?P<run_numero_url>\d+)/email$", support.SupportHandler),
+    (r"/api/" + version + "/support/agents/users$", user_agent.SupportAgentsHandler),
+    (r"/api/" + version + "/support/agents/users/(?P<run_numero_url>\d+)$", user_agent.SupportAgentsHandler)
 ]
 
 # Error application
@@ -59,3 +63,4 @@ if __name__ == "__main__":
     import gevent.wsgi
     server = gevent.wsgi.WSGIServer(("", 8888), application)
     server.serve_forever()
+
